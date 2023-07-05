@@ -1,0 +1,72 @@
+VM sur VirtualBox avec un virtual disk
+VDI
+Dynamically Allocated Storage
+Nat Network pour avoir un environnement avec d'autres machines sans non plus l'exposer a l'internet
+...
+new user username : mael
+Une seule partition avec l'utilisation du disque entier 
+grub boot loader installé
+ajouter mael au sudo group
+install openssh-server et apache2 avec apt
+retirer le login root dans /etc/ssh/sshd_config
+installation de logwatch (j'ai fais iptables a la fin)
+création de directories pour avoir plus facilement acces aux rapports de logwatch
+modification des configs pour avoir un fichier tout les jours
+création d'un script (logwatch_daily) pour avoir la date dans le nom du fichier créé (et aussi logwatch avais l'air de buguer et le script l'a fais fonctionner ¯\_(ツ)_/¯ )
+modification du cron.daily de logwatch pour qu'il utilise le script (00logwatch)
+Installation de Fail2Ban
+copie des fichiers de config pour ne pas perdre mes configs perso avec une update (jail.local)
+Quelques petites modifications mais les configs de base répondent aux criteres (j'ai pas compris pour le serveur FTP? c'était pas dis qu'il fallait en installer un?)
+mise en place des regles iptables :
+iptables --policy INPUT DROP
+iptables --policy FORWARD DROP
+iptables --policy OUTPUT DROP
+iptables -I INPUT -j ACCEPT --dport 22 -p tcp
+iptables -I OUTPUT -j ACCEPT --sport 22 -p tcp
+iptables -I INPUT -j ACCEPT --dport 80 -p tcp
+iptables -I OUTPUT -j ACCEPT --sport 80 -p tcp
+ip6tables --policy INPUT DROP
+ip6tables --policy FORWARD DROP
+ip6tables --policy OUTPUT DROP
+mkdir /etc/iptables
+sudo /sbin/iptables-save > /etc/iptables/rules.v4
+sudo /sbin/ip6tables-save > /etc/iptables/rules.v6
+apt install iptables-persistent
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

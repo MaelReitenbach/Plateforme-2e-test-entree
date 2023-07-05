@@ -1,0 +1,5 @@
+#!/bin/bash
+test -x /usr/share/logwatch/scripts/logwatch.pl || exit 0
+/usr/sbin/logwatch --output file --filename /var/cache/logwatch/$(date +%Y%m%d)-logwatch.txt
+chmod 644 /var/cache/logwatch/*.txt
+mv /var/cache/logwatch/*.txt /home/mael/rapports
